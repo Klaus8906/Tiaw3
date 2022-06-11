@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>Cadastro de Perfil do Usuário</title>
+    <meta charset="utf-8" /> 
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      window.onload = () => {
+        nome.onchange = () => console.log('change', nome.value)
+        nome.oninput = () => {
+            let = caracterInvalido = '()*&%$#@?/|<>:{[}].!1234567890_-';
+            if(caracterInvalido.indexOf(nome.value.charAt(nome.value.length-1))>=0)
+              nome.value = nome.value.substr(0,nome.value.length-1);
+            nome.value = nome.value.toUpperCase();
+        }
+        nome.onblur = () => {
+            if(nome.value.length == 0){
+              nome.style.border = "thin red solid"}
+        }
+
+        senha.onchange = () => console.log(senha.value);
+        senha.onchange = () => console.log('change', senha.value);
+        senha.onblur = () => {
+            if(senha.value.length < 4)
+              alert('Sua senha está fraca! Insira uma senha maior');
+        }
+        cpf.onblur = () => {
+            if(cpf.value.length < 11){
+              cpf.style.border = "thin red solid"
+              }
+        }
+        login.onsubmit = () => {
+          if ((cpf.value.length != 0) || (senha.value.length != 0) || (nome.value.length != 0)){
+          localStorage.setItem("username", nome.value);
+          localStorage.setItem("password", senha.value);
+          localStorage.setItem("cpf", cpf.value);
+          alert(`Usuário ${nome.value} cadastrado!`);
+          }
+          else
+          {
+          login.preventDefault("submit");
+          } 
+        }
+        const primeiro_login = [
+          `{
+            nome: 'KLAUS',
+            senha: 1234,
+            cpf: 123.841.076.66
+          }`
+        ]
+        const JSONdata = JSON.parse(primeiro_login);
+        console.log(JSONdata);
+        
+      }
+    </script>
+  </head>
+  <body>
+    <form id ="login" action="https://postman-echo.com/post" method="post">
+      <h3> Faça seu cadastro </h3>
+      <div>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome..."/> </div>
+        <span id="instrucoes"></span>
+        <input type="password" id="senha" name="senha" placeholder="Sua senha..." /> </p>
+        <div>
+          <input type="text" id="cpf" name="cpf" placeholder="Seu C.P.F..." />
+        </div>
+        <div><button type="submit"> Cadastrar</button></div>      
+    </form>
+  </body>
+</html>
